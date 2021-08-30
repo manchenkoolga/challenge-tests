@@ -48,7 +48,7 @@ Feature: Create New Challenge
     And  I should see Submission Banner "is" active
     Then I should see Submission Banner details are visible
     And I should see Save button is disabled
-    When I enter "1" as a reward in reward input field
+    When I enter Idea Reward
     And I Enter Submission Start Date
     And I Enter Submission End Date
     And I Enter Submission Start Time
@@ -58,7 +58,6 @@ Feature: Create New Challenge
 
     # Edit Idea Submission Terms
     When I click on Edit button on Idea Submission Banner status page
-    And I select random value for Idea Reward
     And I update Idea Reward in reward input field
     And I update Submission Start Date
     And I update Submission End Date
