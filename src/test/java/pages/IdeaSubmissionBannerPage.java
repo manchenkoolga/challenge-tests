@@ -95,11 +95,7 @@ public class IdeaSubmissionBannerPage extends PageTools {
         click(editIdeaSubmissionButton);
     }
 
-    public String selectRandomIdeaReward() {
-        return String.valueOf(RandomUtils.nextInt(1,99));
-    }
-
-    public void updateIdeaReward(String updatedIdeaReward) {
+    public void updateIdeaReward( String updatedIdeaReward) {
         jsClick(ideaRewardInputField);
         while (!ideaRewardInputField.getAttribute("value").equals("")) {
             getAction().sendKeys(ideaRewardInputField, Keys.BACK_SPACE).perform();

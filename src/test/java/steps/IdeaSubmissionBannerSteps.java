@@ -1,6 +1,7 @@
 package steps;
 
 import entities.AdminUserEntity;
+import entities.IdeaSubmissionBannerEntity;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,27 +11,13 @@ import pages.IdeaSubmissionBannerPage;
 import util.api.OperatorApiClient;
 import util.helpers.Helper;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class IdeaSubmissionBannerSteps {
     private final IdeaSubmissionBannerPage ideaSubmissionBannerPage;
-    private String updatedIdeaReward;
-
-    private final String submissionStartDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-    private final String updatedSubmissionStartDate = LocalDateTime.now().plusDays(7).format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-
-    private final String submissionEndDate = LocalDateTime.now().plusDays(2).format(DateTimeFormatter.ofPattern("MM/dd/yyy"));
-    private final String updatedSubmissionEndDate = LocalDateTime.now().plusDays(9).format(DateTimeFormatter.ofPattern("MM/dd/yyy"));
-
-    private final String submissionStartTime = "11:00 A";
-    private final String updatedSubmissionStartTime = "12:00 A";
-
-    private final String submissionEndTime = "11:00 A";
-    private final  String updatedSubmissionEndTime = "12:00 A";
+    private final IdeaSubmissionBannerEntity ideaSubmissionBannerEntity;
 
 
     public IdeaSubmissionBannerSteps() {
+        ideaSubmissionBannerEntity =  new IdeaSubmissionBannerEntity();
         ideaSubmissionBannerPage = new IdeaSubmissionBannerPage();
     }
 
@@ -55,30 +42,29 @@ public class IdeaSubmissionBannerSteps {
         OperatorApiClient.iTurnOffIdeaSubmissionBanner(adminUserEntity.getEmail(), adminUserEntity.getPassword());
     }
 
-    @When("I enter {string} as a reward in reward input field")
-    public void iEnterRewardInRewardInputField(String reward) {
-        ideaSubmissionBannerPage.enterRewardInRewardInputField(reward);
+    @When("I enter Idea Reward")
+    public void iEnterRewardInRewardInputField() {
+        ideaSubmissionBannerPage.enterRewardInRewardInputField(ideaSubmissionBannerEntity.getIdeaReward());
     }
 
     @And("I Enter Submission Start Date")
     public void iEnterSubmissionStartDate() {
-        ideaSubmissionBannerPage.enterSubmissionStartDate(submissionStartDate);
+        ideaSubmissionBannerPage.enterSubmissionStartDate(ideaSubmissionBannerEntity.getSubmissionStartDate());
     }
 
     @And("I Enter Submission End Date")
     public void iEnterSubmissionEndDate() {
-        ideaSubmissionBannerPage.enterSubmissionEndDate(submissionEndDate);
-    }
-
-    @And("I Enter Submission End Time")
-    public void iEnterSubmissionEndTime() {
-        ideaSubmissionBannerPage.enterSubmissionEndTime(submissionEndTime);
+        ideaSubmissionBannerPage.enterSubmissionEndDate(ideaSubmissionBannerEntity.getSubmissionEndDate());
     }
 
     @And("I Enter Submission Start Time")
     public void iEnterSubmissionStartTime() {
-        ideaSubmissionBannerPage.enterSubmissionStartTime(submissionStartTime);
+        ideaSubmissionBannerPage.enterSubmissionStartTime(ideaSubmissionBannerEntity.getSubmissionStartTime());
+    }
 
+    @And("I Enter Submission End Time")
+    public void iEnterSubmissionEndTime() {
+        ideaSubmissionBannerPage.enterSubmissionEndTime(ideaSubmissionBannerEntity.getSubmissionEndTime());
     }
 
     @And("I click on Save button on Idea Submission Banner status page")
@@ -96,59 +82,59 @@ public class IdeaSubmissionBannerSteps {
         ideaSubmissionBannerPage.clickOnEditButton();
     }
 
-    @And("I select random value for Idea Reward")
-    public String selectRandomIdeaReward() {
-        return updatedIdeaReward = ideaSubmissionBannerPage.selectRandomIdeaReward();
-    }
+//    @And("I select random value for Idea Reward")
+//    public String selectRandomIdeaReward() {
+//        return updatedIdeaReward = ideaSubmissionBannerPage.selectRandomIdeaReward();
+//    }
 
     @And("I update Idea Reward in reward input field")
     public void iUpdateIdeaRewardInRewardInputField() {
-        ideaSubmissionBannerPage.updateIdeaReward(updatedIdeaReward);
+        ideaSubmissionBannerPage.updateIdeaReward(ideaSubmissionBannerEntity.getUpdatedIdeaReward());
     }
 
     @And("I update Submission Start Date")
     public void iUpdateSubmissionStartDate() {
-        ideaSubmissionBannerPage.updateSubmissionStartDate(updatedSubmissionStartDate);
+        ideaSubmissionBannerPage.updateSubmissionStartDate(ideaSubmissionBannerEntity.getUpdatedSubmissionStartDate());
     }
 
     @And("I update Submission End Date")
     public void iUpdateSubmissionEndDate() {
-        ideaSubmissionBannerPage.updateSubmissionEndDate(updatedSubmissionEndDate);
+        ideaSubmissionBannerPage.updateSubmissionEndDate(ideaSubmissionBannerEntity.getUpdatedSubmissionEndDate());
     }
 
     @And("I update Submission Start Time")
     public void iUpdateSubmissionStartTime() {
-        ideaSubmissionBannerPage.updateSubmissionStartTime(updatedSubmissionStartTime);
+        ideaSubmissionBannerPage.updateSubmissionStartTime(ideaSubmissionBannerEntity.getUpdatedSubmissionStartTime());
     }
 
     @And("I update Submission End Time")
     public void iUpdateSubmissionEndTime() {
-        ideaSubmissionBannerPage.updateSubmissionEndTime(updatedSubmissionEndTime);
+        ideaSubmissionBannerPage.updateSubmissionEndTime(ideaSubmissionBannerEntity.getUpdatedSubmissionEndTime());
     }
 
     @Then("I should see Idea Reward is updated")
     public void iShouldSeeIdeaRewardIsUpdated() {
-        Assert.assertEquals(updatedIdeaReward, ideaSubmissionBannerPage.getUpdatedIdeaReward());
+        Assert.assertEquals(ideaSubmissionBannerEntity.getUpdatedIdeaReward(), ideaSubmissionBannerPage.getUpdatedIdeaReward());
     }
 
     @And("I should see Submission Start Date is updated")
     public void iShouldSeeSubmissionStartDateIsUpdated() {
-        Assert.assertEquals(updatedSubmissionStartDate, ideaSubmissionBannerPage.getUpdatedSubmissionStartDate());
+        Assert.assertEquals(ideaSubmissionBannerEntity.getUpdatedSubmissionStartDate(), ideaSubmissionBannerPage.getUpdatedSubmissionStartDate());
     }
 
     @And("I should see Submission End Date is updated")
     public void iShouldSeeSubmissionEndDateIsUpdated() {
-        Assert.assertEquals(updatedSubmissionEndDate, ideaSubmissionBannerPage.getUpdatedSubmissionEndDate());
+        Assert.assertEquals(ideaSubmissionBannerEntity.getUpdatedSubmissionEndDate(), ideaSubmissionBannerPage.getUpdatedSubmissionEndDate());
     }
 
     @And("I should see Submission Start Time is updated")
     public void iShouldSeeSubmissionStartTimeIsUpdated() {
-        Assert.assertTrue((ideaSubmissionBannerPage.getUpdatedSubmissionStartTime()).contains(updatedSubmissionStartTime));
+        Assert.assertTrue((ideaSubmissionBannerPage.getUpdatedSubmissionStartTime()).contains(ideaSubmissionBannerPage.getUpdatedSubmissionStartTime()));
     }
 
     @And("I should see Submission End Time is updated")
     public void iShouldSeeSubmissionEndTimeIsUpdated() {
-        Assert.assertTrue((ideaSubmissionBannerPage.getUpdatedSubmissionEndTime()).contains(updatedSubmissionEndTime));
+        Assert.assertTrue((ideaSubmissionBannerPage.getUpdatedSubmissionEndTime()).contains(ideaSubmissionBannerEntity.getUpdatedSubmissionEndTime()));
     }
 
     @And("I should see Submission Banner {string} active")
