@@ -1,26 +1,19 @@
 package steps;
 
+import entities.ChallengeEntity;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.CreateNewChallengePage;
-import util.helpers.Helper;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class CreateNewChallengeSteps {
     private final CreateNewChallengePage createNewChallengePage;
-    private final String  challengeTitle = Helper.generateRandomChallengeTitle(5);
-    private final String challengeHashtag = Helper.generateRandomChallengeHashTag(3);
-    private final String challengeDescription = Helper.generateRandomChallengeDescription(3);
-    private final String challengeStartDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddyyyy"));
-    private final String challengeEndDate=LocalDateTime.now().plusDays(10).format(DateTimeFormatter.ofPattern("MMddyyyy"));
-    private final String challengeStartTime="12:00 A";
+    private final ChallengeEntity challengeEntity;
 
     public CreateNewChallengeSteps() {
         createNewChallengePage = new CreateNewChallengePage();
+        challengeEntity = new ChallengeEntity();
     }
 
     @Then("I should see Creating New Challenge page")
@@ -29,9 +22,7 @@ public class CreateNewChallengeSteps {
     }
 
     @When("I enter Challenge Title")
-    public void iEnterChallengeTitle() {
-        createNewChallengePage.enterChallengeTitle(challengeTitle);
-    }
+    public void iEnterChallengeTitle() { createNewChallengePage.enterChallengeTitle(challengeEntity.getChallengeTitle()); }
 
     @And("I select Challenge Interest")
     public void iSelectChallengeInterest() {
@@ -40,32 +31,32 @@ public class CreateNewChallengeSteps {
 
     @And("I enter Challenge Hashtag")
     public void iEnterChallengeHashtag() {
-        createNewChallengePage.enterChallengeHashTag(challengeHashtag);
+        createNewChallengePage.enterChallengeHashTag(challengeEntity.getChallengeHashtag());
     }
 
     @And("I enter Challenge Description")
     public void iEnterChallengeDescription() {
-        createNewChallengePage.enterChallengeDescription(challengeDescription);
+        createNewChallengePage.enterChallengeDescription(challengeEntity.getChallengeDescription());
     }
 
     @And("I enter Challenge Start Date")
     public void iEnterChallengeStartDate() {
-        createNewChallengePage.enterChallengeStartDate(challengeStartDate);
+        createNewChallengePage.enterChallengeStartDate(challengeEntity.getChallengeStartDate());
     }
 
     @And("I enter Challenge End Date")
     public void iEnterChallengeEndDate() {
-        createNewChallengePage.enterChallengeEndDate(challengeEndDate);
+        createNewChallengePage.enterChallengeEndDate(challengeEntity.getChallengeEndDate());
     }
 
     @And("I enter Challenge Start Time")
     public void iEnterChallengeStartTime() {
-        createNewChallengePage.enterChallengeStartTime(challengeStartTime);
+        createNewChallengePage.enterChallengeStartTime(challengeEntity.getChallengeStartTime());
     }
 
     @And("I enter Challenge End Time")
     public void iEnterChallengeEndTime() {
-        createNewChallengePage.enterChallengeEndTime();
+        createNewChallengePage.enterChallengeEndTime(challengeEntity.getChallengeEndTime());
     }
 
     @And("I click on Save Draft button")
@@ -75,7 +66,7 @@ public class CreateNewChallengeSteps {
 
     @Then("I should see Challenge Details screen")
     public void iShouldSeeChallengeDetailsScreen() {
-        Assert.assertTrue(createNewChallengePage.isChallengeTitleDisplayed(challengeTitle), "challenge title not found");
+        Assert.assertTrue(createNewChallengePage.isChallengeTitleDisplayed(challengeEntity.getChallengeTitle()), "challenge title not found");
     }
 
     @And("I upload Challenge Image {string}")

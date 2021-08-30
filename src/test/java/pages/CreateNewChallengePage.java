@@ -92,9 +92,9 @@ public class CreateNewChallengePage extends PageTools {
         challengeStartTimeInputField.sendKeys(Keys.ENTER);
     }
 
-    public void enterChallengeEndTime() {
+    public void enterChallengeEndTime(String challengeEndTime) {
         click(challengeEndTimeInputField);
-        sendKeys(challengeEndTimeInputField, "12:00 A");
+        sendKeys(challengeEndTimeInputField, challengeEndTime);
         challengeEndTimeInputField.sendKeys(Keys.ENTER);
     }
 

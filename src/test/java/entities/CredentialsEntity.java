@@ -6,7 +6,7 @@ import util.config.ReadConfig;
 
 import java.util.List;
 
-public class Credentials {
+public class CredentialsEntity {
     @CsvBindByName(column = "user")
     private String user;
 
@@ -40,8 +40,8 @@ public class Credentials {
         this.password = password;
     }
 
-    public static List<Credentials> getCredentials() {
-        return CsvParser.parseCsvToList(Credentials.class, ReadConfig.getConfigProperty("cred_path"));
+    public static List<CredentialsEntity> getCredentials() {
+        return CsvParser.parseCsvToList(CredentialsEntity.class, ReadConfig.getConfigProperty("cred_path"));
     }
 }
 

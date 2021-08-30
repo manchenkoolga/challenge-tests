@@ -1,6 +1,6 @@
 package steps;
 
-import entities.AdminUser;
+import entities.AdminUserEntity;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,8 +19,8 @@ public class LoginSteps {
 
     @When("I enter {string} valid credentials")
     public void iEnterUserEmail(String user){
-        AdminUser adminUser = Helper.getUserCredentials(user);
-        loginPage.enterUserCredentials(adminUser.getEmail(), adminUser.getPassword());
+        AdminUserEntity adminUserEntity = Helper.getUserCredentials(user);
+        loginPage.enterUserCredentials(adminUserEntity.getEmail(), adminUserEntity.getPassword());
     }
 
     @And("I click on SignIn button")

@@ -1,6 +1,6 @@
 package steps;
 
-import entities.AdminUser;
+import entities.AdminUserEntity;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -51,8 +51,8 @@ public class IdeaSubmissionBannerSteps {
 
     @Given("I deactivate Idea Submission banner via API")
     public void iDeactivateIdeaSubmissionBannerViaAPI() {
-        AdminUser adminUser = Helper.getUserCredentials("15sofAdmin");
-        OperatorApiClient.iTurnOffIdeaSubmissionBanner(adminUser.getEmail(), adminUser.getPassword());
+        AdminUserEntity adminUserEntity = Helper.getUserCredentials("15sofAdmin");
+        OperatorApiClient.iTurnOffIdeaSubmissionBanner(adminUserEntity.getEmail(), adminUserEntity.getPassword());
     }
 
     @When("I enter {string} as a reward in reward input field")

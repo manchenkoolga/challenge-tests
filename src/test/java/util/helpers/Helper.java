@@ -1,7 +1,7 @@
 package util.helpers;
 
-import entities.AdminUser;
-import entities.Credentials;
+import entities.AdminUserEntity;
+import entities.CredentialsEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import util.config.ReadConfig;
@@ -46,12 +46,12 @@ public class Helper {
         return DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH);
     }
 
-    public static AdminUser getUserCredentials(String user) {
-        Credentials credentials = Credentials.getCredentials()
+    public static AdminUserEntity getUserCredentials(String user) {
+        CredentialsEntity credentialsEntity = CredentialsEntity.getCredentials()
                 .stream()
                 .filter(cred -> cred.getUser().equals(user))
                 .findFirst()
                 .orElseThrow(null);
-        return new AdminUser(credentials.getEmail(), credentials.getPassword());
+        return new AdminUserEntity(credentialsEntity.getEmail(), credentialsEntity.getPassword());
     }
 }

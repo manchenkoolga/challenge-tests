@@ -1,10 +1,10 @@
 package entities;
 
-public class AdminUser {
+public class AdminUserEntity {
     private String email;
     private String password;
 
-    public AdminUser(String email, String password) {
+    public AdminUserEntity(String email, String password) {
         this.email = email;
         this.password = password;
     }
